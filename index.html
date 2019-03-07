@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>IronMan - a Secure Onchain Wallet for ENU</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
+  
+  <!-- Custom fonts for this template -->
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+      rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+      rel='stylesheet' type='text/css'>
+  
+  <!-- Plugin CSS -->
+  <link href="https://cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+  
+  <!-- Custom styles for this template -->
+  <link href="https://cdn.bootcss.com/startbootstrap-creative/5.1.3/css/creative.min.css" rel="stylesheet">
+  
+  <style>
+      .logo {
+          width: 22px;
+          margin: 0 7px;
+      }
+  
+      .hidden {
+          display: none;
+      }
+  
+      .mb-5 {
+          margin-bottom: 25px !important;
+      }
+  
+      input[type="text"].form-control {
+          padding: .6rem .75rem;
+      }
+  
+      body .btn:disabled {
+          opacity: 1;
+          cursor: not-allowed;
+          background-color: #ccc !important;
+          border-color: #ccc !important;
+      }
+  </style>
+  <style>
+    .logo {
+      width: 22px;
+      margin: 0 7px;
+    }
+
+    .form {
+      width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .wrap-submit {
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    .wrap-submit .btn {
+      border-radius: 0.25rem;
+    }
+
+    .wrap-submit .btn:disabled {
+      opacity: 1;
+      cursor: not-allowed;
+      background-color: #ccc;
+      border-color: #ccc;
+    }
+
+    .wrap-submit .btn:disabled:hover {
+      opacity: 1;
+      cursor: not-allowed;
+      background-color: #ccc !important;
+      border-color: #ccc;
+    }
+
+    .message-transfer {
+      display: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .message-transfer a {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+          <img src="https://enuironman.com/img/logo.png" class="logo">
+          <a class="navbar-brand js-scroll-trigger" href="/">ENU Ironman</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/demo_transfer">Transfer</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/demo_buyram">Buy Ram</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/demo_sellram">Sell Ram</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/demo_stakecpunet">Stake</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/demo_namebids">Namebids</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="/contracts">Contracts</a>
+                  </li>                
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <header class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <p class="text-faded mb-5" id="j_announce">This demo shows how to transfer any amount of ENU to any account with your Ironman wallet. If you havn't installed
+            Ironman, please install first.</p>
+
+          <form class="form">
+
+            <style>
+                .account-info {
+                    margin-top: 10px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            
+                .name :first-child,
+                .balance :first-child {
+                    text-align: right;
+                }
+            
+                .name :last-child,
+                .balance :last-child {
+                    text-align: left;
+                }
+            </style>
+            <div id="j_accountInfo" class="account-info form-group" style="display:none">
+                <div class="row name">
+                    <div class="col-lg-4">Account:</div>
+                    <div class="col-lg-8" id="j_accountName">Name</div>
+                </div>
+                <div class="row balance">
+                    <div class="col-lg-4">Balance:</div>
+                    <div class="col-lg-8" id="j_accountBalance">1111 ENU</div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="j_amount">ENU</label>
+              <input type="text" class="form-control" id="j_amount" value="1.0000" placeholder="1.0000 ENU">
+            </div>
+            <div class="form-group">
+              <label for="j_user">Transfer to account</label>
+              <input type="text" class="form-control" id="j_user" value="ansenironman" placeholder="Account">
+            </div>
+            <div class="form-group">
+              <label for="j_message">Memo</label>
+              <input type="text" class="form-control" id="j_message" value="donation to bp" placeholder="Message">
+            </div>
+            <div class="wrap-submit">
+              <button type="submit" title="Ironman Extension Not Loaded" class="btn btn-primary btn-block btn-lg" id="j_submit" disabled>Transfer</button>
+            </div>
+            <p class="message-transfer">
+              <a id="j_result" target="_blank" href="#">Check Transfer Result</a>
+              <br>
+              <a id="j_account" target="_blank" href="#">Check My Account</a>
+              <br>
+              <a id="j_receiverAccount" target="_blank" href="#" style="display:none">Check Receiver Account</a>
+              <br>
+              <sapn style="color: #f05f40; word-wrap: break-word;">
+                Transaction ID:
+                <span id="j_transaction_id">74d5ed819d52df6cc2cce0e953f5c26831649464fde552cb1bd1a0b050790398</span>
+                </span>
+            </p>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+ <!-- Bootstrap core JavaScript -->
+<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://enuironman.com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://enuironman.com/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://enuironman.com/vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="https://enuironman.com/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="https://enuironman.com/js/creative.min.js"></script>
+
+
+  <!-- enu demo -->
+  <script type="text/javascript" src="https://enuironman.com/js/sha256.js"></script>
+  <script type="text/javascript" src="https://enuironman.com/js/enu.20180703.js"></script>
+  <script type="text/javascript" src="https://enuironman.com/js/common.1.js"></script>
+  <script type="text/javascript">
+    initIronman(cb);
+
+    function cb(ironman, enu, requiredFields, account) {
+      getAccountBalance(enu, account);
+
+      $('#j_submit').on('click', function (event) {
+        event.preventDefault();
+        let amount = $('#j_amount').val() || 1.0000;
+        let user = $('#j_user').val() || 'ansenironman';
+        let message = $('#j_message').val() || 'Test Ironman Transfer';
+        if (!isNumeric(amount)) {
+          alert('Please Input a valid ENU');
+        }
+        amount = parseFloat(amount).toFixed(4) + ' ENU';
+        console.log(account, amount, user, message);
+
+        $('#j_submit').prop('disabled', true).text('Loading...');
+        setTimeout(function () {
+          $('#j_submit').prop('disabled', false).text('Transfer');
+        }, 5000);
+
+        //执行智能合约
+        enu.contract('enu.token', {
+          requiredFields
+        }).then(contract => {
+          contract.transfer(account.name, user, amount, message, ).then(trx => {
+            console.log("2.获取签名后的交易，前端需要将此数据传入后台", trx);
+            $('#j_announce').hide();
+            getAccountBalance(enu, account);
+            let url = `http://enumivo.qsx.io/transactions/${trx.transaction_id}`;
+            $('.message-transfer').show(400);
+            $('#j_transaction_id').html(trx.transaction_id);
+            $('#j_result').attr('href', url);
+            $('#j_account').attr('href', `http://enumivo.qsx.io/accounts/${account.name}`);
+            if (user !== account.name) {
+              $('#j_receiverAccount').attr('href', `http://enumivo.qsx.io/accounts/${user}`).show();
+            } else {
+              $('#j_receiverAccount').hide();
+            }
+
+            //                        submit(trx);
+          }).catch(e => {
+            console.log("error", e);
+            if (e.toString().includes("overdrawn balance")) {
+              alert("No money, go back to Getting Started and refill")
+            }
+            let error = JSON.parse(e);
+            alert(error.message || 'Server Error');
+          })
+        });
+      });
+    }
+  </script>
+
+</body>
+
+</html>
+
